@@ -123,23 +123,27 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-dark-900/95 backdrop-blur-xl shadow-2xl border-b border-white/10' 
+          : 'bg-transparent'
       }`}
     >
       <div className='flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-12 py-2 sm:py-2.5 md:py-3'>
         <motion.div
-          className='flex items-center cursor-pointer gap-1 sm:gap-2'
+          className='flex items-center cursor-pointer gap-1 sm:gap-2 group'
           onClick={() => scrollToSection('home')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <img 
+          <motion.img 
             src={Logo} 
             alt="Logo" 
-            className='h-10 sm:h-12 md:h-14 lg:h-16 w-auto transition-all duration-300' 
+            className='h-10 sm:h-12 md:h-14 lg:h-16 w-auto transition-all duration-300 group-hover:brightness-110' 
+            whileHover={{ rotate: [0, -5, 5, -5, 0] }}
+            transition={{ duration: 0.5 }}
           />
-          <span className='font-semibold text-sm sm:text-base md:text-lg lg:text-xl whitespace-nowrap'>
+          <span className='font-semibold text-sm sm:text-base md:text-lg lg:text-xl whitespace-nowrap gradient-text-static group-hover:opacity-90 transition-opacity duration-300'>
             DEVPARTNER
           </span>
         </motion.div>
@@ -150,7 +154,7 @@ const Navbar = () => {
             <motion.button
               key={link.id}
               onClick={() => scrollToSection(link.id)}
-              className='relative text-base xl:text-lg font-medium text-gray-800 hover:text-gray-600 transition-colors px-2'
+              className='relative text-base xl:text-lg font-medium text-gray-200 hover:text-white transition-colors px-2 group'
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
               initial={{ opacity: 0, y: -20 }}
@@ -159,9 +163,12 @@ const Navbar = () => {
             >
               {link.name}
               <motion.span
-                className='absolute bottom-0 left-0 w-0 h-0.5 bg-gray-800'
+                className='absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500'
                 whileHover={{ width: '100%' }}
                 transition={{ duration: 0.3 }}
+              />
+              <motion.span
+                className='absolute -inset-1 rounded-lg bg-gradient-to-r from-primary-500/20 to-accent-500/20 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300'
               />
             </motion.button>
           ))}
@@ -173,7 +180,7 @@ const Navbar = () => {
             <motion.button
               key={link.id}
               onClick={() => scrollToSection(link.id)}
-              className='relative text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors px-1'
+              className='relative text-sm font-medium text-gray-200 hover:text-white transition-colors px-1 group'
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
               initial={{ opacity: 0, y: -20 }}
@@ -182,7 +189,7 @@ const Navbar = () => {
             >
               {link.name}
               <motion.span
-                className='absolute bottom-0 left-0 w-0 h-0.5 bg-gray-800'
+                className='absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500'
                 whileHover={{ width: '100%' }}
                 transition={{ duration: 0.3 }}
               />
@@ -192,9 +199,10 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <motion.button
-          className='md:hidden text-xl sm:text-2xl text-gray-800 z-50 p-1.5 -mr-2'
+          className='md:hidden text-xl sm:text-2xl text-gray-200 hover:text-white z-50 p-1.5 -mr-2 transition-colors'
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.1 }}
           aria-label="Toggle menu"
         >
           <AnimatePresence mode="wait">
@@ -232,7 +240,7 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className='fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden z-40'
+              className='fixed inset-0 bg-dark-950/80 backdrop-blur-md md:hidden z-40'
               onClick={() => setIsMenuOpen(false)}
               onTouchMove={(e) => e.preventDefault()}
               style={{ touchAction: 'none' }}
@@ -242,7 +250,7 @@ const Navbar = () => {
               initial="closed"
               animate="open"
               exit="closed"
-              className='fixed top-0 right-0 h-full w-[85%] sm:w-3/4 max-w-sm bg-white shadow-2xl md:hidden z-40 overflow-y-auto'
+              className='fixed top-0 right-0 h-full w-[85%] sm:w-3/4 max-w-sm bg-gradient-to-br from-dark-900 to-dark-950 border-l border-white/10 shadow-2xl md:hidden z-40 overflow-y-auto'
               data-menu-panel="true"
             >
               <div className='flex flex-col items-start justify-start pt-20 sm:pt-24 px-6 sm:px-8 gap-4 sm:gap-6'>
@@ -254,11 +262,14 @@ const Navbar = () => {
                     initial="closed"
                     animate="open"
                     onClick={() => scrollToSection(link.id)}
-                    className='text-xl sm:text-2xl font-semibold text-gray-800 hover:text-gray-600 transition-colors w-full text-left py-2 sm:py-3'
+                    className='text-xl sm:text-2xl font-semibold text-gray-200 hover:text-white transition-colors w-full text-left py-2 sm:py-3 relative group'
                     whileHover={{ x: 10 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    {link.name}
+                    <span className="relative z-10">{link.name}</span>
+                    <motion.span
+                      className="absolute left-0 top-0 h-full w-0 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-r-lg transition-all duration-300 group-hover:w-full"
+                    />
                   </motion.button>
                 ))}
               </div>

@@ -51,19 +51,19 @@ const SocialMediaLinks = () => {
   ];
 
   return (
-    <div className="bg-stone-950 text-white text-xl md:text-2xl">
-      <p className="border-b-[1px] border-stone-500 text-sm md:text-base py-9 px-6 md:px-20">
+    <div className="bg-gradient-to-b from-dark-950 to-dark-900 text-white text-xl md:text-2xl relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(14,165,233,0.05),transparent_50%)]" />
+      <p className="border-b-[1px] border-white/10 text-sm md:text-base py-9 px-6 md:px-20 text-gray-400 relative z-10">
         SOCIAL MEDIA AND CONTACTS
       </p>
       {socialLinks.map((link, index) => (
-        <a href={link.url} target="_blank">
+        <a href={link.url} target="_blank" key={link.name} rel="noopener noreferrer">
           <div
-            key={link.name}
             className={`${
               hoveredLink === index
-                ? "text-stone-950 bg-white"
-                : "bg-stone-950 text-white"
-            } border-b-[1px] border-stone-500 py-7 px-0 mx-0 overflow-x-hidden`}
+                ? "text-dark-950 bg-gradient-to-r from-primary-400 to-accent-400"
+                : "bg-transparent text-gray-200 hover:text-white"
+            } border-b-[1px] border-white/10 py-7 px-0 mx-0 overflow-x-hidden transition-all duration-300 relative group`}
             onMouseEnter={() => setHoveredLink(index)}
             onMouseLeave={() => setHoveredLink(null)}
           >
@@ -71,10 +71,10 @@ const SocialMediaLinks = () => {
               <motion.div
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.9 }}
-                className="flex items-center justify-between px-6 md:px-20"
+                className="flex items-center justify-between px-6 md:px-20 relative z-10"
               >
-                <span>{link.name}</span>
-                <MdOutlineArrowOutward className="text-4xl" />
+                <span className="group-hover:translate-x-2 transition-transform duration-300">{link.name}</span>
+                <MdOutlineArrowOutward className="text-4xl group-hover:rotate-45 transition-transform duration-300" />
               </motion.div>
             ) : (
               <motion.div

@@ -6,10 +6,74 @@
     font-family: "Poppins", sans-serif;
 }
 
+html {
+    /* Remove smooth scroll when using Locomotive Scroll */
+    scroll-behavior: auto;
+    /* Enable hardware acceleration for smoother scrolling */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Locomotive Scroll optimizations */
+html.has-scroll-smooth {
+    overflow: hidden;
+}
+
+html.has-scroll-dragging {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.has-scroll-smooth body {
+    overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+    min-height: 100vh;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-container] {
+    height: 100vh;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-section] {
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+    height: 100%;
+}
+
+body {
+    background-color: #0a0a0a;
+    color: rgb(243, 244, 246);
+    overflow-x: hidden;
+}
+
 #design {
     font-family: "Roboto Flex", sans-serif;
     font-style: italic;
     /* letter-spacing: 0.2rem; */
+}
+
+/* Smooth scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #171717;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, rgb(168, 85, 247), rgb(14, 165, 233));
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, rgb(192, 132, 252), rgb(56, 189, 248));
 }
 
 /* Hero animations */
@@ -36,4 +100,79 @@
 .animate-fade-in-up-delayed-2 {
     animation: fadeInUp 0.8s ease-out 0.6s forwards;
     opacity: 0;
+}
+
+/* Interactive hover effects */
+@layer utilities {
+    .hover-lift {
+        @apply transition-all duration-300 ease-out;
+    }
+    
+    .hover-lift:hover {
+        @apply -translate-y-2 shadow-2xl;
+    }
+    
+    .gradient-text {
+        background: linear-gradient(to right, rgb(56, 189, 248), rgb(192, 132, 252), rgb(56, 189, 248));
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: gradient-shift 3s ease infinite;
+    }
+    
+    .gradient-text-static {
+        background: linear-gradient(to right, rgb(56, 189, 248), rgb(192, 132, 252), rgb(56, 189, 248));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        display: inline-block;
+    }
+    
+    @keyframes gradient-shift {
+        0%, 100% {
+            background-position: 0% center;
+        }
+        50% {
+            background-position: 100% center;
+        }
+    }
+    
+    .glass-effect {
+        @apply bg-white/10 backdrop-blur-md border border-white/20;
+    }
+    
+    .glow-effect {
+        @apply relative;
+    }
+    
+    .glow-effect::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 0.5rem;
+        filter: blur(24px);
+        opacity: 0.5;
+        background: linear-gradient(to right, rgb(14, 165, 233), rgb(168, 85, 247));
+        z-index: -10;
+        transition: opacity 0.3s ease;
+    }
+    
+    .glow-effect:hover::before {
+        @apply opacity-75;
+    }
+}
+
+/* Section transitions */
+section {
+    @apply transition-all duration-500;
+}
+
+/* Smooth focus styles */
+*:focus-visible {
+    outline: 2px solid rgb(14, 165, 233);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
 }

@@ -15,24 +15,36 @@ const FollowUs = () => {
   return (
     <div
       ref={containerRef}
-      className="bg-stone-950 text-white overflow-hidden py-9 font-light"
+      className="bg-gradient-to-b from-dark-950 via-dark-900 to-dark-950 text-white overflow-hidden py-9 font-light relative"
     >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.1),transparent_70%)]" />
       <motion.div
         style={{ x }}
-        className="flex justify-around items-center text-[4rem] md:text-[8rem]"
+        className="flex justify-around items-center text-[4rem] md:text-[8rem] relative z-10"
       >
-        <span className="flex shrink-0 space-x-1 items-center">
-          Follow Us{" "}
-          <AiFillTwitterCircle className="text-6xl md:text-8xl text-stone-300 mx-9" />
+        <span className="flex shrink-0 space-x-1 items-center group">
+          <span className="bg-gradient-to-r from-white via-primary-300 to-accent-300 bg-clip-text text-transparent">
+            Follow Us
+          </span>{" "}
+          <AiFillTwitterCircle className="text-6xl md:text-8xl text-primary-400 mx-9 transition-all duration-300 group-hover:scale-110 group-hover:text-primary-300" />
+        </span>
+        <span className="flex shrink-0 space-x-1 items-center group">
+          <span className="bg-gradient-to-r from-white via-primary-300 to-accent-300 bg-clip-text text-transparent">
+            Follow Us
+          </span>{" "}
+          <ImLinkedin className="text-[5rem] text-accent-400 mx-9 rounded-full transition-all duration-300 group-hover:scale-110 group-hover:text-accent-300" />
+        </span>
+        <span className="flex shrink-0 space-x-1 items-center group">
+          <span className="bg-gradient-to-r from-white via-primary-300 to-accent-300 bg-clip-text text-transparent">
+            Follow Us
+          </span>{" "}
+          <LiaGithub className="text-8xl text-primary-400 mx-9 transition-all duration-300 group-hover:scale-110 group-hover:text-primary-300" />
         </span>
         <span className="flex shrink-0 space-x-1 items-center">
-          Follow Us{" "}
-          <ImLinkedin className="text-[5rem] text-stone-300 mx-9 rounded-full" />
+          <span className="bg-gradient-to-r from-white via-primary-300 to-accent-300 bg-clip-text text-transparent">
+            Follow Us
+          </span>
         </span>
-        <span className="flex shrink-0 space-x-1 items-center">
-          Follow Us <LiaGithub className="text-8xl text-stone-300 mx-9" />
-        </span>
-        <span className="flex shrink-0 space-x-1 items-center">Follow Us</span>
       </motion.div>
     </div>
   );

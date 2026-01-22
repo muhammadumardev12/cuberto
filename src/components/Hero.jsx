@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import introVideo from "../assets/videos/intro.mp4";
 
 const Hero = () => {
@@ -25,55 +26,79 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative w-full min-h-screen md:min-h-[90vh] flex flex-col lg:flex-row items-center overflow-hidden bg-black">
-      {/* Left Side - Text Content */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center px-6 md:px-12 lg:px-16 py-12 lg:py-0">
+    <div className="relative w-full min-h-[92vh] md:min-h-[88vh] flex flex-col lg:flex-row items-center overflow-hidden bg-gradient-hero">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-950/20 via-transparent to-accent-950/20 animate-pulse" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(168,85,247,0.1),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(14,165,233,0.1),transparent_50%)]" />
+
+      <div className="relative w-full lg:w-1/2 flex items-center justify-center px-6 md:px-12 lg:px-16 py-12 md:py-14 lg:py-0 z-10">
         <div className="flex flex-col items-start text-left space-y-6 md:space-y-8 max-w-2xl">
-          {/* Heading with fade-in and slide-up animation */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight leading-tight animate-fade-in-up">
           Smart Automation
             <br />
-            <span className="font-normal">Powerful IT Solutions</span>
+            <span className="font-normal bg-gradient-to-r from-primary-300 via-white to-accent-300 bg-clip-text text-transparent">
+              Powerful IT Solutions
+            </span>
             <br />
             {/* agency */}
           </h1>
 
           {/* Subheading with fade-in and slide-up animation (delayed) */}
-          <p className="text-lg sm:text-xl md:text-2xl text-white/90 font-light animate-fade-in-up-delayed">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 font-light animate-fade-in-up-delayed leading-relaxed">
           Helping businesses optimize operations and grow with technology.
           </p>
 
           {/* Buttons with fade-in and slide-up animation (more delayed) */}
           <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mt-4 md:mt-8 animate-fade-in-up-delayed-2">
-            <button className="px-8 py-4 md:px-10 md:py-5 bg-white text-black font-medium text-base md:text-lg rounded-lg transition-all duration-300 hover:bg-white/90 hover:scale-105 hover:shadow-xl active:scale-100">
-              Get Started
-            </button>
-            <button className="px-8 py-4 md:px-10 md:py-5 bg-transparent border-2 border-white text-white font-medium text-base md:text-lg rounded-lg transition-all duration-300 hover:bg-white hover:text-black hover:scale-105 hover:shadow-xl active:scale-100">
-              View Our Work
-            </button>
+            <motion.button 
+              className="relative px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-base md:text-lg rounded-lg overflow-hidden group glow-effect"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <span className="relative z-10">Get Started</span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
+            </motion.button>
+            <motion.button 
+              className="px-8 py-4 md:px-10 md:py-5 bg-transparent border-2 border-white/30 text-white font-medium text-base md:text-lg rounded-lg backdrop-blur-sm hover:border-white/60 transition-all duration-300 group relative overflow-hidden"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <span className="relative z-10">View Our Work</span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-accent-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
+            </motion.button>
           </div>
         </div>
       </div>
 
       {/* Right Side - Video */}
-      <div className="w-full lg:w-1/2 relative h-[50vh] md:h-[60vh] lg:h-screen lg:min-h-[90vh] bg-black">
-        <div className="relative w-full h-full">
+      <div className="w-full lg:w-1/2 relative h-[48vh] md:h-[58vh] lg:h-[88vh] bg-dark-950/50">
+        <div className="relative w-full h-full group">
+          <div className="absolute inset-0 bg-gradient-to-l from-dark-950/50 to-transparent z-10 pointer-events-none" />
           <video
             ref={videoRef}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain transition-all duration-500 group-hover:scale-105"
             src={introVideo}
             autoPlay
             loop
             muted={isMuted}
             playsInline
           />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-accent-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
 
         {/* Video Controls */}
         <div className="absolute bottom-6 right-6 z-20 flex gap-3">
-          <button
+          <motion.button
             onClick={togglePlayPause}
-            className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 active:scale-95"
+            className="glass-effect text-white p-3 rounded-full transition-all duration-300 group"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            whileTap={{ scale: 0.95 }}
             aria-label={isPlaying ? "Pause" : "Play"}
           >
             {isPlaying ? (
@@ -101,10 +126,12 @@ const Hero = () => {
                 />
               </svg>
             )}
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={toggleMute}
-            className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 active:scale-95"
+            className="glass-effect text-white p-3 rounded-full transition-all duration-300 group"
+            whileHover={{ scale: 1.1, rotate: -5 }}
+            whileTap={{ scale: 0.95 }}
             aria-label={isMuted ? "Unmute" : "Mute"}
           >
             {isMuted ? (
@@ -140,7 +167,7 @@ const Hero = () => {
                 />
               </svg>
             )}
-          </button>
+          </motion.button>
         </div>
       </div>
     </div>
