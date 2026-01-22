@@ -31,8 +31,8 @@ const Hero = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(168,85,247,0.1),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(14,165,233,0.1),transparent_50%)]" />
 
-      <div className="relative w-full lg:w-1/2 flex items-center justify-center px-6 md:px-12 lg:px-16 py-12 md:py-14 lg:py-0 z-10">
-        <div className="flex flex-col items-start text-left space-y-6 md:space-y-8 max-w-2xl">
+      <div className="relative w-full lg:w-[115%] flex items-center justify-start px-6 md:px-12 lg:px-16 py-12 md:py-14 lg:py-0 z-10">
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 md:space-y-8 max-w-2xl w-full">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight leading-tight animate-fade-in-up">
           Smart Automation
             <br />
@@ -49,9 +49,9 @@ const Hero = () => {
           </p>
 
           {/* Buttons with fade-in and slide-up animation (more delayed) */}
-          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mt-4 md:mt-8 animate-fade-in-up-delayed-2">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mt-4 md:mt-8 animate-fade-in-up-delayed-2 justify-center lg:justify-start w-full sm:w-auto lg:w-full">
             <motion.button 
-              className="relative px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-base md:text-lg rounded-lg overflow-hidden group glow-effect"
+              className="relative px-10 py-4 md:px-12 md:py-5 w-full sm:w-auto min-w-[200px] bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-base md:text-lg rounded-lg overflow-hidden group glow-effect"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -62,7 +62,7 @@ const Hero = () => {
               />
             </motion.button>
             <motion.button 
-              className="px-8 py-4 md:px-10 md:py-5 bg-transparent border-2 border-white/30 text-white font-medium text-base md:text-lg rounded-lg backdrop-blur-sm hover:border-white/60 transition-all duration-300 group relative overflow-hidden"
+              className="px-10 py-4 md:px-12 md:py-5 w-full sm:w-auto min-w-[200px] bg-transparent border-2 border-white/30 text-white font-medium text-base md:text-lg rounded-lg backdrop-blur-sm hover:border-white/60 transition-all duration-300 group relative overflow-hidden"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -77,7 +77,7 @@ const Hero = () => {
       </div>
 
       {/* Right Side - Video */}
-      <div className="w-full lg:w-1/2 relative h-[48vh] md:h-[58vh] lg:h-[88vh] bg-dark-950/50">
+      <div className="w-full lg:w-[40%] relative h-[48vh] md:h-[58vh] lg:h-[88vh] bg-dark-950/50">
         <div className="relative w-full h-full group">
           <div className="absolute inset-0 bg-gradient-to-l from-dark-950/50 to-transparent z-10 pointer-events-none" />
           <video
