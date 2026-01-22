@@ -65,8 +65,8 @@ const App = () => {
       <div id="about">
         <Philosophy />
       </div>
-      <FollowUs />
-      <SocialMediaLinks />
+      {/* <FollowUs /> */}
+      {/* <SocialMediaLinks /> */}
       <ContactDetails />
     </div>
   );

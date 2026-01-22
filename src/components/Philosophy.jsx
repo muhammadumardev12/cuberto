@@ -12,7 +12,7 @@ const Philosophy = () => {
   ];
 
   return (
-    <div className="text-white font-normal h-fit pb-8 sm:pb-10 md:pb-12 lg:pb-16 md:rounded-t-[3rem] lg:rounded-t-[4rem] md:-mt-[3rem] lg:-mt-[4rem] bg-gradient-to-b from-white via-gray-50 to-dark-950 relative overflow-hidden">
+    <div className="text-white font-normal h-fit pb-8 sm:pb-10 md:pb-12 lg:pb-16 md:-mt-[3rem] lg:-mt-[4rem] bg-gradient-to-b from-white via-gray-50 to-dark-950 relative overflow-hidden">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-500/5 to-accent-500/5" />
       
