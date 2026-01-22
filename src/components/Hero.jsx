@@ -4,6 +4,7 @@ import introVideo from "../assets/videos/intro.mp4";
 
 const Hero = () => {
   const videoRef = useRef(null);
+  const backgroundVideoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
 
@@ -26,26 +27,40 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative w-full min-h-[92vh] md:min-h-[88vh] flex flex-col lg:flex-row items-center overflow-hidden bg-gradient-hero">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-950/20 via-transparent to-accent-950/20 animate-pulse" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(168,85,247,0.1),transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(14,165,233,0.1),transparent_50%)]" />
+    <div className="relative w-full min-h-[100vh] md:min-h-[88vh] flex flex-col lg:flex-row items-center overflow-hidden bg-gradient-hero">
+      {/* Background Video */}
+      <video
+        ref={backgroundVideoRef}
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        src="https://cdn.cuberto.com/cb/showreel/2.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+      
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-br from-dark-950/70 via-dark-900/60 to-dark-950/70 z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-950/20 via-transparent to-accent-950/20 z-[1]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(168,85,247,0.1),transparent_50%)] z-[1]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(14,165,233,0.1),transparent_50%)] z-[1]" />
 
-      <div className="relative w-full lg:w-[115%] flex items-center justify-start px-6 md:px-12 lg:px-16 py-12 md:py-14 lg:py-0 z-10">
+      <div className="relative w-full lg:w-[115%] flex items-center justify-start px-6 md:px-12 lg:px-16 py-12 md:py-14 lg:py-0 z-[2]">
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 md:space-y-8 max-w-2xl w-full">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight leading-tight animate-fade-in-up">
-          Smart Automation
+          Automate
             <br />
             <span className="font-normal bg-gradient-to-r from-primary-300 via-white to-accent-300 bg-clip-text text-transparent">
-              Powerful IT Solutions
+            Innovate
             </span>
             <br />
-            {/* agency */}
+            Scale
+
           </h1>
 
           {/* Subheading with fade-in and slide-up animation (delayed) */}
           <p className="text-lg sm:text-xl md:text-2xl text-gray-300 font-light animate-fade-in-up-delayed leading-relaxed">
-          Helping businesses optimize operations and grow with technology.
+          Technology-driven solutions to simplify and grow your business.
           </p>
 
           {/* Buttons with fade-in and slide-up animation (more delayed) */}
@@ -76,20 +91,33 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Right Side - Video */}
-      <div className="w-full lg:w-[40%] relative h-[48vh] md:h-[58vh] lg:h-[88vh] bg-dark-950/50">
-        <div className="relative w-full h-full group">
-          <div className="absolute inset-0 bg-gradient-to-l from-dark-950/50 to-transparent z-10 pointer-events-none" />
-          <video
-            ref={videoRef}
-            className="w-full h-full object-contain transition-all duration-500 group-hover:scale-105"
-            src={introVideo}
-            autoPlay
-            loop
-            muted={isMuted}
-            playsInline
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-accent-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Right Side - Circular Video Frame */}
+      <div className="w-full lg:w-[40%] relative min-h-[50vh] md:min-h-[58vh] lg:h-[88vh] z-[2] flex items-center justify-center lg:justify-end lg:pr-8 xl:pr-12 py-8 md:py-0">
+        <div className="relative flex items-center justify-center group" style={{ width: 'min(70vw, 450px)', height: 'min(70vw, 450px)', maxWidth: '450px', maxHeight: '450px' }}>
+          {/* Subtle glow behind */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-500/30 via-accent-500/30 to-primary-500/30 rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
+          
+          {/* Circular frame with gradient border */}
+          <div className="relative w-full h-full rounded-full p-1"
+               style={{
+                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2))',
+                 aspectRatio: '1 / 1',
+               }}
+          >
+            <div className="w-full h-full rounded-full overflow-hidden bg-dark-950/90 backdrop-blur-sm" style={{ aspectRatio: '1 / 1' }}>
+              <video
+                ref={videoRef}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                src={introVideo}
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                style={{ aspectRatio: '1 / 1', objectFit: 'cover' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-accent-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+            </div>
+          </div>
         </div>
 
         {/* Video Controls */}
