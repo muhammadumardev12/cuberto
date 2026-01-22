@@ -21,11 +21,17 @@ const App = () => {
   return (
     <div className="w-full">
       <Navbar />
-      <Hero />
+      <div id="home" className="pt-14 sm:pt-16 md:pt-18 lg:pt-20">
+        <Hero />
+      </div>
       <Reel />
-      <Services />
+      <div id="services">
+        <Services />
+      </div>
       <Projects />
-      <Philosophy />
+      <div id="about">
+        <Philosophy />
+      </div>
       <FollowUs />
       <SocialMediaLinks />
       <ContactDetails />
