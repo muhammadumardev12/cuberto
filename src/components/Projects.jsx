@@ -67,7 +67,7 @@ const Projects = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-b from-dark-950 via-dark-900 to-dark-950 text-white py-16 md:py-24 lg:py-32 px-6 md:px-12 lg:px-20 xl:px-32 overflow-hidden">
+    <section id="projects" className="relative bg-gradient-to-b from-dark-950 via-dark-900 to-dark-950 text-white py-16 md:py-24 lg:py-32 px-6 md:px-12 lg:px-20 xl:px-32 overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl" />

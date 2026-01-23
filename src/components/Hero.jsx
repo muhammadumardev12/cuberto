@@ -54,6 +54,13 @@ const Hero = () => {
     }
   };
 
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="relative w-full min-h-[100vh] md:min-h-[88vh] flex flex-col lg:flex-row items-center overflow-hidden bg-gradient-hero">
       {/* Background Video */}
@@ -94,6 +101,7 @@ const Hero = () => {
           {/* Button with fade-in and slide-up animation (more delayed) */}
           <div className="flex mt-4 md:mt-8 animate-fade-in-up-delayed-2 justify-center lg:justify-start">
             <motion.button 
+              onClick={scrollToProjects}
               className="px-10 py-4 md:px-12 md:py-5 min-w-[200px] bg-transparent border-2 border-white/30 text-white font-medium text-base md:text-lg rounded-lg backdrop-blur-sm hover:border-white/60 transition-all duration-300 group relative overflow-hidden"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
@@ -194,7 +202,7 @@ const Hero = () => {
               className="relative rounded-[2rem] md:rounded-[2.5rem] p-[2px] overflow-hidden"
               style={{
                 width: 'min(75vw, 340px)',
-                height: 'min(110vw, 560px)',
+                height: 'min(140vw, 560px)',
                 maxWidth: '340px',
                 maxHeight: '600px',
               }}
