@@ -65,17 +65,20 @@ const Hero = () => {
 
           {/* Buttons with fade-in and slide-up animation (more delayed) */}
           <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mt-4 md:mt-8 animate-fade-in-up-delayed-2 justify-center lg:justify-start w-full sm:w-auto lg:w-full">
-            <motion.button 
-              className="relative px-10 py-4 md:px-12 md:py-5 w-full sm:w-auto min-w-[200px] bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-base md:text-lg rounded-lg overflow-hidden group glow-effect"
+            <motion.a
+              href="https://api.leadconnectorhq.com/widget/booking/Ns0Q5SZw947R18gd9yKf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative px-10 py-4 md:px-12 md:py-5 w-full sm:w-auto min-w-[200px] bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-base md:text-lg rounded-lg overflow-hidden group glow-effect inline-flex items-center justify-center"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <span className="relative z-10">Get Started</span>
+              <span className="relative z-10">Book a Call</span>
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               />
-            </motion.button>
+            </motion.a>
             <motion.button 
               className="px-10 py-4 md:px-12 md:py-5 w-full sm:w-auto min-w-[200px] bg-transparent border-2 border-white/30 text-white font-medium text-base md:text-lg rounded-lg backdrop-blur-sm hover:border-white/60 transition-all duration-300 group relative overflow-hidden"
               whileHover={{ scale: 1.05, y: -2 }}

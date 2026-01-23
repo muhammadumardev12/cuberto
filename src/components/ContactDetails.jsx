@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { HiMail, HiCheck, HiClipboardCopy } from "react-icons/hi";
+import { HiMail, HiCheck, HiClipboardCopy, HiCalendar } from "react-icons/hi";
 import { AiFillTwitterCircle, AiFillFacebook, AiFillLinkedin } from "react-icons/ai";
 import { FaGithub, FaInstagram } from "react-icons/fa";
 
@@ -118,9 +118,28 @@ const ContactDetails = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-light mb-4 gradient-text-static">
             Get in Touch
           </h2>
-          <p className="text-sm md:text-base text-white/60 font-light max-w-2xl mx-auto">
+          <p className="text-sm md:text-base text-white/60 font-light max-w-2xl mx-auto mb-6 md:mb-8">
             Connect with us on social media or drop us an email.
           </p>
+          
+          {/* Book a Call Button */}
+          <motion.a
+            href="https://api.leadconnectorhq.com/widget/booking/Ns0Q5SZw947R18gd9yKf"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: -10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-2 px-8 py-3 md:px-10 md:py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-base md:text-lg rounded-full overflow-hidden group glow-effect relative"
+          >
+            <HiCalendar className="w-5 h-5 md:w-6 md:h-6" />
+            <span className="relative z-10">Book a Call</span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            />
+          </motion.a>
         </motion.div>
 
         {/* Contact Cards */}

@@ -1,45 +1,55 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-const ProjectCard = ({ title, url, index = 0 }) => {
+const ProjectCard = ({ title, image, index = 0, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div 
-      className="my-8 md:my-14 group"
+      className="group relative w-full"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ 
+        duration: 0.4, 
+        delay: index * 0.1
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
     >
-      <div className="w-full h-fit rounded-3xl overflow-hidden relative cursor-pointer">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-accent-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl blur-xl z-10 pointer-events-none" />
+      <div className="w-full rounded-2xl md:rounded-3xl overflow-hidden relative cursor-pointer bg-dark-800">
+        {/* Glow effect on hover */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 via-accent-500/20 to-primary-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl md:rounded-3xl blur-xl z-0 -inset-2" />
+        
+        {/* Image container */}
         <motion.div
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="relative z-0"
+          className="relative w-full z-10"
+          whileHover={{ scale: 1.03 }}
+          transition={{ duration: 0.3 }}
         >
-          <video 
-            src={url} 
-            loop 
-            autoPlay 
-            muted
-            className="w-full h-full object-cover transition-all duration-500"
+          <img 
+            src={image} 
+            alt={title}
+            className="w-full h-auto object-contain transition-all duration-500"
+            loading="lazy"
             style={{ 
               filter: isHovered ? 'brightness(1.1) saturate(1.2)' : 'brightness(1) saturate(1)'
             }}
-          ></video>
+          />
+          
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-dark-950/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-dark-950/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+
+        {/* Title overlay */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <h3 className="text-xl md:text-2xl font-semibold text-white">
+            {title}
+          </h3>
+          <div className="w-0 group-hover:w-12 h-0.5 bg-gradient-to-r from-primary-400 to-accent-400 transition-all duration-300 mt-2" />
+        </div>
       </div>
-      <motion.p 
-        className="my-4 text-xl text-gray-200 group-hover:text-white transition-colors duration-300"
-        whileHover={{ x: 5 }}
-      >
-        {title}
-      </motion.p>
     </motion.div>
   );
 };
