@@ -12,9 +12,11 @@ const Philosophy = () => {
   ];
 
   return (
-    <div className="text-white font-normal h-fit pb-8 sm:pb-10 md:pb-12 lg:pb-16 md:-mt-[3rem] lg:-mt-[4rem] bg-gradient-to-b from-white via-gray-50 to-dark-950 relative overflow-hidden">
+    <div className="text-white font-normal h-fit pb-8 sm:pb-10 md:pb-12 lg:pb-16 md:-mt-[3rem] lg:-mt-[4rem] bg-gradient-to-b from-dark-900 via-dark-950 to-dark-950 relative overflow-hidden">
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-500/5 to-accent-500/5" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary-500/5 via-transparent to-accent-500/5" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(168,85,247,0.08),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(14,165,233,0.08),transparent_50%)]" />
       
       {/* Main Content Section */}
       <div className="flex flex-col md:flex-row items-start justify-between md:gap-x-8 lg:gap-x-12 xl:gap-x-16 relative z-10 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 2xl:px-32 py-4 sm:py-6 md:py-8 lg:py-10">
@@ -29,8 +31,8 @@ const Philosophy = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <h1 className="leading-tight text-center md:text-left">
-              <span className="text-dark-950 font-semibold">About </span>
-              <span className="tracking-wide bg-gradient-to-r from-dark-950 via-primary-600 to-accent-600 bg-clip-text text-transparent font-semibold">
+              <span className="text-white font-semibold">About </span>
+              <span className="tracking-wide bg-gradient-to-r from-white via-primary-400 to-accent-400 bg-clip-text text-transparent font-semibold">
                 Us
               </span>
             </h1>
@@ -38,14 +40,14 @@ const Philosophy = () => {
 
           {/* Description */}
           <motion.div 
-            className="space-y-3 sm:space-y-4 text-sm sm:text-base md:text-base lg:text-lg text-dark-700 leading-relaxed"
+            className="space-y-3 sm:space-y-4 text-sm sm:text-base md:text-base lg:text-lg text-gray-300 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
           >
           <motion.p 
-            className="text-dark-700 md:text-dark-800"
+            className="text-gray-300 md:text-gray-200"
             whileHover={{ x: 5 }}
             transition={{ duration: 0.3 }}
           >
@@ -54,7 +56,7 @@ const Philosophy = () => {
             as they were during the design phase, no short cuts or simplifications.
           </motion.p>
           <motion.p 
-            className="text-dark-700 md:text-dark-800"
+            className="text-gray-300 md:text-gray-200"
             whileHover={{ x: 5 }}
             transition={{ duration: 0.3 }}
           >
@@ -65,7 +67,7 @@ const Philosophy = () => {
 
           {/* Stats below description */}
           <motion.div 
-            className="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-6 md:gap-8 lg:gap-10 mt-6 sm:mt-7 md:mt-8 pt-6 sm:pt-7 md:pt-8 border-t border-gray-200/60"
+            className="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-6 md:gap-8 lg:gap-10 mt-6 sm:mt-7 md:mt-8 pt-6 sm:pt-7 md:pt-8 border-t border-white/10"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -101,7 +103,7 @@ const Philosophy = () => {
                 >
                   {stat.number}
                 </motion.div>
-                <p className="text-xs sm:text-sm md:text-base text-dark-600 mt-1 sm:mt-2 group-hover:text-dark-950 transition-colors duration-300 relative z-10 font-medium">
+                <p className="text-xs sm:text-sm md:text-base text-gray-400 mt-1 sm:mt-2 group-hover:text-white transition-colors duration-300 relative z-10 font-medium">
                   {stat.label}
                 </p>
               </motion.div>

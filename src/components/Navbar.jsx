@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { HiOutlineMenuAlt4, HiX } from "react-icons/hi";
+import { createPortal } from 'react-dom';
+import { HiOutlineMenuAlt4, HiX, HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from "react-icons/hi";
+import { FaLinkedinIn, FaInstagram, FaTwitter } from "react-icons/fa";
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '../assets/images/Logo5.png';
 
@@ -16,72 +18,45 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768 && isMenuOpen) {
-        setIsMenuOpen(false);
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [isMenuOpen]);
-
-  useEffect(() => {
     if (isMenuOpen) {
-      const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
-      const preventDefault = (e) => {
-        const menuPanel = document.querySelector('[data-menu-panel="true"]');
-        if (menuPanel && menuPanel.contains(e.target)) {
-          return;
-        }
-        e.preventDefault();
-      };
-
-      document.addEventListener('touchmove', preventDefault, { passive: false, capture: true });
-      document.addEventListener('wheel', preventDefault, { passive: false, capture: true });
-      document.addEventListener('scroll', preventDefault, { passive: false, capture: true });
       
       return () => {
-        // Restore scroll position
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
-        window.scrollTo(0, scrollY);
-        document.removeEventListener('touchmove', preventDefault, { capture: true });
-        document.removeEventListener('wheel', preventDefault, { capture: true });
-        document.removeEventListener('scroll', preventDefault, { capture: true });
       };
     }
   }, [isMenuOpen]);
 
   const scrollToSection = (sectionId) => {
-    if (sectionId === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const isMobile = window.innerWidth < 768;
-        const offset = isMobile ? 60 : 70;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        });
-      }
-    }
+    // Close menu first and restore scroll
     setIsMenuOpen(false);
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    // Small delay to let menu close, then scroll
+    setTimeout(() => {
+      if (sectionId === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const offset = 80; // navbar height offset
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          });
+        }
+      }
+    }, 100);
   };
 
   const navLinks = [
     { name: 'Home', id: 'home' },
-    { name: 'Services', id: 'services' },
+    { name: 'Services', id: 'projects' },
     { name: 'About us', id: 'about' },
   ];
 
@@ -119,12 +94,13 @@ const Navbar = () => {
   };
 
   return (
+    <>
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled 
+        isScrolled && !isMenuOpen
           ? 'bg-dark-900/60 backdrop-blur-lg shadow-2xl border-b border-white/10' 
           : 'bg-transparent'
       }`}
@@ -148,63 +124,31 @@ const Navbar = () => {
           </span>
         </motion.div>
 
-        {/* Desktop Navigation */}
-        <div className='hidden lg:flex items-center gap-6 xl:gap-8'>
-          {navLinks.map((link, index) => (
-            <motion.button
-              key={link.id}
-              onClick={() => scrollToSection(link.id)}
-              className='relative text-base xl:text-lg font-medium text-gray-200 hover:text-white transition-colors px-2 group'
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              {link.name}
-              <motion.span
-                className='absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500'
-                whileHover={{ width: '100%' }}
-                transition={{ duration: 0.3 }}
-              />
-              <motion.span
-                className='absolute -inset-1 rounded-lg bg-gradient-to-r from-primary-500/20 to-accent-500/20 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300'
-              />
-            </motion.button>
-          ))}
-        </div>
+        <div className="flex items-center gap-3 sm:gap-4">
+          {/* Book a Call Button */}
+          <motion.a
+            href="https://api.leadconnectorhq.com/widget/booking/Ns0Q5SZw947R18gd9yKf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative px-4 py-2 sm:px-6 sm:py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-sm sm:text-base rounded-lg overflow-hidden group glow-effect"
+            whileHover={{ scale: 1.05, y: -1 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <span className="relative z-10">Book a Call</span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            />
+          </motion.a>
 
-        {/* Tablet Navigation (md to lg) */}
-        <div className='hidden md:flex lg:hidden items-center gap-4'>
-          {navLinks.map((link, index) => (
-            <motion.button
-              key={link.id}
-              onClick={() => scrollToSection(link.id)}
-              className='relative text-sm font-medium text-gray-200 hover:text-white transition-colors px-1 group'
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              {link.name}
-              <motion.span
-                className='absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500'
-                whileHover={{ width: '100%' }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
-          ))}
-        </div>
-
-        {/* Mobile Menu Button */}
-        <motion.button
-          className='md:hidden text-xl sm:text-2xl text-gray-200 hover:text-white z-50 p-1.5 -mr-2 transition-colors'
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          whileTap={{ scale: 0.9 }}
-          whileHover={{ scale: 1.1 }}
-          aria-label="Toggle menu"
-        >
+          {/* Menu Button */}
+          <motion.button
+            className='text-2xl sm:text-3xl text-gray-200 hover:text-white z-[70] p-2 transition-colors'
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.1 }}
+            aria-label="Toggle menu"
+          >
           <AnimatePresence mode="wait">
             {isMenuOpen ? (
               <motion.div
@@ -229,55 +173,172 @@ const Navbar = () => {
             )}
           </AnimatePresence>
         </motion.button>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className='fixed inset-0 bg-dark-950/80 backdrop-blur-md md:hidden z-40'
-              onClick={() => setIsMenuOpen(false)}
-              onTouchMove={(e) => e.preventDefault()}
-              style={{ touchAction: 'none' }}
-            />
-            <motion.div
-              variants={menuVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
-              className='fixed top-0 right-0 h-full w-[85%] sm:w-3/4 max-w-sm bg-gradient-to-br from-dark-900 to-dark-950 border-l border-white/10 shadow-2xl md:hidden z-40 overflow-y-auto'
-              data-menu-panel="true"
-            >
-              <div className='flex flex-col items-start justify-start pt-20 sm:pt-24 px-6 sm:px-8 gap-4 sm:gap-6'>
-                {navLinks.map((link, index) => (
-                  <motion.button
-                    key={link.id}
-                    custom={index}
-                    variants={linkVariants}
-                    initial="closed"
-                    animate="open"
-                    onClick={() => scrollToSection(link.id)}
-                    className='text-xl sm:text-2xl font-semibold text-gray-200 hover:text-white transition-colors w-full text-left py-2 sm:py-3 relative group'
-                    whileHover={{ x: 10 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span className="relative z-10">{link.name}</span>
-                    <motion.span
-                      className="absolute left-0 top-0 h-full w-0 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-r-lg transition-all duration-300 group-hover:w-full"
-                    />
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </motion.nav>
+
+      {/* Mobile Menu - Rendered via Portal outside nav */}
+      {createPortal(
+        <AnimatePresence>
+          {isMenuOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className='fixed inset-0 bg-dark-950/80 backdrop-blur-md z-[60]'
+                onClick={() => setIsMenuOpen(false)}
+                onTouchMove={(e) => e.preventDefault()}
+                style={{ touchAction: 'none' }}
+              />
+              <motion.div
+                variants={menuVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+                className='fixed top-0 right-0 h-full w-[85%] sm:w-3/4 md:w-1/2 lg:w-2/5 max-w-md bg-gradient-to-br from-dark-900 via-dark-950 to-dark-900 border-l border-white/10 shadow-2xl z-[65] overflow-y-auto'
+                data-menu-panel="true"
+              >
+                {/* Close Button */}
+                <motion.button
+                  className='absolute top-4 right-4 text-2xl sm:text-3xl text-gray-200 hover:text-white p-2 z-10'
+                  onClick={() => setIsMenuOpen(false)}
+                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.1 }}
+                  aria-label="Close menu"
+                >
+                  <HiX />
+                </motion.button>
+
+                {/* Decorative Background Elements */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary-500/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent-500/10 rounded-full blur-3xl pointer-events-none" />
+                
+                {/* Navigation Links */}
+                <div className='flex flex-col items-start justify-start pt-16 sm:pt-20 px-6 sm:px-8 gap-1'>
+                  <motion.p 
+                    className="text-xs uppercase tracking-widest text-gray-500 mb-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    Navigation
+                  </motion.p>
+                  {navLinks.map((link, index) => (
+                    <motion.button
+                      key={link.id}
+                      custom={index}
+                      variants={linkVariants}
+                      initial="closed"
+                      animate="open"
+                      onClick={() => scrollToSection(link.id)}
+                      className='text-lg sm:text-xl md:text-2xl font-semibold text-gray-300 hover:text-white transition-all duration-300 w-full text-left py-1.5 sm:py-2 relative group overflow-hidden'
+                      whileHover={{ x: 15 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <span className="relative z-10 flex items-center gap-4">
+                        <motion.span 
+                          className="w-0 h-[2px] bg-gradient-to-r from-primary-500 to-accent-500 group-hover:w-8 transition-all duration-300"
+                        />
+                        {link.name}
+                      </span>
+                      <motion.span
+                        className="absolute left-0 top-0 h-full w-0 bg-gradient-to-r from-primary-500/10 to-accent-500/10 rounded-r-xl transition-all duration-500 group-hover:w-full"
+                      />
+                    </motion.button>
+                  ))}
+                </div>
+
+                {/* Contact Info Section */}
+                <motion.div 
+                  className='mt-auto px-6 sm:px-8 pb-6 pt-6'
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">Get in Touch</p>
+                  
+                  {/* Contact Items */}
+                  <div className="space-y-2">
+                    <motion.a 
+                      href="mailto:contact@devpartner.com"
+                      className="flex items-center gap-4 text-gray-400 hover:text-white transition-all duration-300 group"
+                      whileHover={{ x: 5 }}
+                    >
+                      <span className="p-2 rounded-lg bg-white/5 group-hover:bg-primary-500/20 transition-colors duration-300">
+                        <HiOutlineMail className="w-5 h-5" />
+                      </span>
+                      <span className="text-sm sm:text-base">contact@devpartner.com</span>
+                    </motion.a>
+                    
+                    <motion.a 
+                      href="tel:+1234567890"
+                      className="flex items-center gap-4 text-gray-400 hover:text-white transition-all duration-300 group"
+                      whileHover={{ x: 5 }}
+                    >
+                      <span className="p-2 rounded-lg bg-white/5 group-hover:bg-primary-500/20 transition-colors duration-300">
+                        <HiOutlinePhone className="w-5 h-5" />
+                      </span>
+                      <span className="text-sm sm:text-base">+1 (234) 567-890</span>
+                    </motion.a>
+                    
+                    <motion.div 
+                      className="flex items-center gap-4 text-gray-400 group"
+                      whileHover={{ x: 5 }}
+                    >
+                      <span className="p-2 rounded-lg bg-white/5 group-hover:bg-primary-500/20 transition-colors duration-300">
+                        <HiOutlineLocationMarker className="w-5 h-5" />
+                      </span>
+                      <span className="text-sm sm:text-base">New York, USA</span>
+                    </motion.div>
+                  </div>
+
+                  {/* Social Links */}
+                  <div className="mt-4 pt-4 border-t border-white/10">
+                    <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">Follow Us</p>
+                    <div className="flex gap-3">
+                      <motion.a
+                        href="https://linkedin.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 rounded-xl bg-white/5 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-primary-500/20 hover:to-accent-500/20 transition-all duration-300"
+                        whileHover={{ scale: 1.1, y: -3 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <FaLinkedinIn className="w-5 h-5" />
+                      </motion.a>
+                      <motion.a
+                        href="https://instagram.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 rounded-xl bg-white/5 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-primary-500/20 hover:to-accent-500/20 transition-all duration-300"
+                        whileHover={{ scale: 1.1, y: -3 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <FaInstagram className="w-5 h-5" />
+                      </motion.a>
+                      <motion.a
+                        href="https://twitter.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 rounded-xl bg-white/5 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-primary-500/20 hover:to-accent-500/20 transition-all duration-300"
+                        whileHover={{ scale: 1.1, y: -3 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <FaTwitter className="w-5 h-5" />
+                      </motion.a>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </>
   );
 };
 

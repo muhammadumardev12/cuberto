@@ -48,16 +48,20 @@ const App = () => {
   }, []);
 
   return (
-    <div className="w-full" data-scroll-container ref={scrollRef}>
+    <div className="w-full">
       <Navbar />
-      <div id="home" className="pt-14 sm:pt-16 md:pt-18 lg:pt-20">
-        <Hero />
+      <div data-scroll-container ref={scrollRef}>
+        <div id="home" className="pt-14 sm:pt-16 md:pt-18 lg:pt-20">
+          <Hero />
+        </div>
+        <div id="projects">
+          <Projects />
+        </div>
+        <div id="about">
+          <Philosophy />
+        </div>
+        <ContactDetails />
       </div>
-      <Projects />
-      <div id="about">
-        <Philosophy />
-      </div>
-      <ContactDetails />
     </div>
   );
 };
