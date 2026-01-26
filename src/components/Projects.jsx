@@ -19,16 +19,19 @@ const Projects = () => {
       title: "Automotive Repair Podcast NetWork App",
       image: One,
       description: "A feature-rich platform for automotive enthusiasts and professionals to enjoy audio and video podcasts in one place.It automatically resumes playback from where you left off and supports background listening.A floating player and built-in media controls ensure a smooth, uninterrupted experience anytime.",
+      playStoreLink: "https://play.google.com/store/apps/details?id=com.arp.podcast&pli=1",
     },
     {
       title: "Your Life Organized",
       image: Second,
       description: "A mobile platform that helps users catalog, organize, sell, donate, and share personal belongings using photo-based inventory management.Designed with a strong focus on accessibility and ease of use, especially for adults aged 50 and above.It offers secure authentication, AI-assisted item descriptions, smart organization, reminders, and marketplace and charity support.",
+      appStoreLink: "https://apps.apple.com/pk/app/your-life-organized/id6752123949Your Life Organized",
     },
     {
       title: "Salute",
       image: Three,
       description: "An all-in-one platform created for service members, veterans, and military families to stay connected and supported.It brings together career tools, mental wellness resources, education guidance, VA services, and exclusive discounts.Designed to support every stage of military life, helping users stay informed, empowered, and connected beyond the uniform.",
+      playStoreLink: "https://play.google.com/store/apps/details?id=com.nullanon.Salute",
     },
     {
       title: "Global Retrieval Solution",
@@ -44,11 +47,14 @@ const Projects = () => {
       title: "PICME",
       image: Six,
       description: "A platform that connects customers with professional photographers for instant or scheduled bookings.Users can browse portfolios, compare packages, book securely, and chat to finalize details.Photographers can showcase their work, manage availability, and grow their business through streamlined bookings.",
+      playStoreLink: "https://play.google.com/store/apps/details?id=com.thepicme.android",
+      appStoreLink: "https://apps.apple.com/us/app/the-picme-app/id6738265063",
     },
     {
       title: "Auto Shop Awswers",
       image: Seven,
       description: "An event companion designed for automotive professionals attending hands-on training experiences.It provides detailed schedules, speaker insights, networking tools, and interactive features like maps and reminders.Built to help attendees stay organized, connected, and fully engaged throughout the event.",
+
     },
     {
       title: "MindHYVE.ai",
@@ -240,8 +246,45 @@ const Projects = () => {
                     {selectedProject.description}
                   </motion.p>
 
+                  {/* Store Links */}
+                  {(selectedProject.playStoreLink || selectedProject.appStoreLink) && (
+                    <motion.div
+                      className="mt-8 flex flex-wrap gap-3"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 }}
+                    >
+                      {selectedProject.playStoreLink && (
+                        <a
+                          href={selectedProject.playStoreLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-4 py-2.5 bg-dark-800 hover:bg-dark-700 border border-white/10 hover:border-primary-500/50 rounded-xl transition-all duration-300 group"
+                        >
+                          <svg className="w-5 h-5 text-white group-hover:text-primary-400 transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
+                          </svg>
+                          <span className="text-sm font-medium text-white group-hover:text-primary-400 transition-colors">Play Store</span>
+                        </a>
+                      )}
+                      {selectedProject.appStoreLink && (
+                        <a
+                          href={selectedProject.appStoreLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-4 py-2.5 bg-dark-800 hover:bg-dark-700 border border-white/10 hover:border-accent-500/50 rounded-xl transition-all duration-300 group"
+                        >
+                          <svg className="w-5 h-5 text-white group-hover:text-accent-400 transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                          </svg>
+                          <span className="text-sm font-medium text-white group-hover:text-accent-400 transition-colors">App Store</span>
+                        </a>
+                      )}
+                    </motion.div>
+                  )}
+
                   {/* Decorative elements */}
-                  <div className="mt-8 flex gap-2">
+                  <div className="mt-6 flex gap-2">
                     <div className="w-2 h-2 rounded-full bg-primary-400" />
                     <div className="w-2 h-2 rounded-full bg-accent-400" />
                     <div className="w-2 h-2 rounded-full bg-primary-400" />
