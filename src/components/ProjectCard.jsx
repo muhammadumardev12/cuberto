@@ -1,26 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 const ProjectCard = ({ title, image, index = 0, onClick }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <motion.div 
-      className="group relative w-full"
+      className="group relative w-full will-change-transform"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ 
         duration: 0.4, 
-        delay: index * 0.1
+        delay: Math.min(index * 0.08, 0.4)
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
     >
       <div className="w-full rounded-2xl md:rounded-3xl overflow-hidden relative cursor-pointer bg-dark-800">
-        {/* Glow effect on hover */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 via-accent-500/20 to-primary-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl md:rounded-3xl blur-xl z-0 -inset-2" />
+        {/* Glow effect on hover - optimized */}
+        <div className="absolute -inset-1 bg-gradient-to-br from-primary-500/15 via-accent-500/15 to-primary-500/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl md:rounded-3xl z-0" />
         
         {/* Image container */}
         <motion.div
@@ -31,11 +27,8 @@ const ProjectCard = ({ title, image, index = 0, onClick }) => {
           <img 
             src={image} 
             alt={title}
-            className="w-full h-auto object-contain transition-all duration-500"
+            className="w-full h-auto object-contain transition-transform duration-300"
             loading="lazy"
-            style={{ 
-              filter: isHovered ? 'brightness(1.1) saturate(1.2)' : 'brightness(1) saturate(1)'
-            }}
           />
           
           {/* Gradient overlay */}

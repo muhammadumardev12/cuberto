@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import introVideo from "../assets/videos/Final2.mp4";
+import introVideo from "../assets/videos/Demo3.mp4";
 
 const Hero = () => {
   const videoRef = useRef(null);
@@ -201,10 +201,10 @@ const Hero = () => {
             <div 
               className="relative rounded-[2rem] md:rounded-[2.5rem] p-[2px] overflow-hidden"
               style={{
-                width: 'min(75vw, 340px)',
-                height: 'min(140vw, 560px)',
-                maxWidth: '340px',
-                maxHeight: '600px',
+                width: 'min(90vw, 600px)',
+                height: 'min(60vw, 400px)',
+                maxWidth: '600px',
+                maxHeight: '400px',
               }}
             >
               {/* Rotating Gradient Border */}
