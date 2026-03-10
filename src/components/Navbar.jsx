@@ -263,14 +263,14 @@ const Navbar = () => {
                   {/* Contact Items */}
                   <div className="space-y-2">
                     <motion.a 
-                      href="mailto:contact@devpartner.com"
+                      href="mailto:info@devpartners.ai"
                       className="flex items-center gap-4 text-gray-400 hover:text-white transition-all duration-300 group"
                       whileHover={{ x: 5 }}
                     >
                       <span className="p-2 rounded-lg bg-white/5 group-hover:bg-primary-500/20 transition-colors duration-300">
                         <HiOutlineMail className="w-5 h-5" />
                       </span>
-                      <span className="text-sm sm:text-base">contact@devpartner.com</span>
+                      <span className="text-sm sm:text-base">info@devpartners.ai</span>
                     </motion.a>
                     
                     <motion.a 
