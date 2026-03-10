@@ -13,8 +13,8 @@ const ContactDetails = () => {
   const contactInfo = [
     {
       type: "email",
-      value: "Jacobpenaranda767@gmail.com",
-      href: "mailto:Jacobpenaranda767@gmail.com",
+      value: "info@devpartners.ai",
+      href: "mailto:info@devpartners.ai",
       icon: HiMail,
       label: "Email address",
     },

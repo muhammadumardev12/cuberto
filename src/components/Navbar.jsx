@@ -120,7 +120,7 @@ const Navbar = () => {
             transition={{ duration: 0.5 }}
           />
           <span className='font-semibold text-sm sm:text-base md:text-lg lg:text-xl whitespace-nowrap gradient-text-static group-hover:opacity-90 transition-opacity duration-300'>
-            DEVPARTNER
+            DEVPARTNERS
           </span>
         </motion.div>
 
